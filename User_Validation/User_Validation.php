@@ -1,16 +1,49 @@
 <?php
-    include_once "../conection/conex.php";
+    include_once "../conection/conex_cad_user.php";
+    include "../User/user.php";
 
-    $user = $_POST['email'];
-    $senha = $_POST['senha'];
+    $bd = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-    $query = "SELECT 'nome','login','senha','permissao','situacao' WHERE 'login' = ".$user.", 'senha' =".$senha."";
-    $query_sql = mysql_query($query);
-    if($mysql_row_query($query_sql) != 1){
-        echo 'Login Inválido!!!';
+   
+    session_start();
 
+    $query = "SELECT * from user_cad WHERE login = :login AND senha = :senha";
+ 
+    $usuario = new User();
+
+    $usuario->setLogin($bd['login']);
+    $usuario->setSenha($bd['senha']);
+
+    $login = $conn->prepare($query);
+    $login -> bindValue(':login', $usuario->getLogin());
+    $login -> bindValue(':senha', $usuario->getSenha());
+    $login -> execute();
+    
+    $userdb = $login->fetch(PDO::FETCH_OBJ);
+
+    //print_r($userdb);
+
+    $usuario->setNome($userdb->nome);
+    $usuario->setPermissao($userdb->permissao);
+
+    if($login->rowCount() != 0){
+       if($userdb->situacao != 1){
+           echo 'Usuário Desativado';
+           
+       }else{
+        if($usuario->getPermissao() == 0){
+            echo 'Administrador';
+        }else if($usuario->getPermissao() == 1){
+            echo 'Visualizador';
+        }else if($usuario->getPermissao() == 2){
+
+        }else if($usuario->getPermissao() == 3){
+
+        }else if($usuario->getPermissao() == 4){
+
+        }
+       }
     }else{
-        echo 'Sucesso';
+        echo 'Usuário não encontrado';
     }
-
     

@@ -1,12 +1,10 @@
 <?php
 
 
-//Arquivo realiza a conexão do sistema com o banco de dados hospedado no google cloud
-
 $host = "localhost";
 $user = "root";
-$pass = "123";
-$dbname = "cad_user";
+$pass = "";
+$dbname = "users";
 $port = 3306;
 
 try{

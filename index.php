@@ -1,5 +1,6 @@
 <?php
 	include_once "conection/conex.php";
+	session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,14 +14,16 @@
  	
     	<div class="login-container">
     		<h1>Login</h1>
-    		<form action="User_Validation/User_Validation.php" method="POST">
-    			<label for="email">E-mail</label>
-    			<input type="email" name="email" id="email" placeholder="E-mail" autocomplete="off">
+    		<form method="POST" id="login_user_form" action="User_Validation/User_Validation.php">
+    			<label for="login">E-mail</label>
+    			<input type="email" name="login" id="login" placeholder="E-mail" autocomplete="off" value="admin@gmail.com">
     			<label for="password">Senha</label>
-    			<input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="off">
+    			<input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="off" value="123@senha">
     			<a href="#" id="forgot-pass">Esqueceu a senha?</a>
-    			<input type="submit" value="Login" method="POST">
+    			<input type="submit" value="Login" id="login_user">
+				<span id="msgAlerta"></span>
     		</form>
+			<script src="scripts/login.js"></script>
     	</div>
         
     </body>
