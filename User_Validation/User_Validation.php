@@ -3,7 +3,7 @@
     include_once "../conection/conex.php";
     include "../User/user.php"; 
 
-    //Melhorias: Criptografar as senhas, criar variáveis globais de $_SESSION.
+    //Melhorias: Criptografar as senhas, criar variáveis globais de $_SESSION
 
     $bd = filter_input_array(INPUT_POST, FILTER_DEFAULT);
     $usuario = new User();

@@ -11,3 +11,10 @@
    box-shadow: 0px 3px 10px -1px rgba(0,0,0,0.78);
 
 }
+
+.container-usuarios{
+    border-radius: 16px;
+    background: #e0e0e0;
+    box-shadow:  14px 14px 28px #a1a1a1,
+             -14px -14px 28px #ffffff;
+}

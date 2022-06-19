@@ -1,11 +1,5 @@
 <?php
     include_once '../User_Validation/Session_Validation.php';
-    if($_SESSION['permissao'] != 0){
-        $retorna = ['erro' => true, 'msg' => "</br><div class='alert alert-danger' 
-        role='alert'> Login ou senha inválidos! 
-        </div></br>"];
-        json_encode($retorna);
-    }
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +23,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="../home.php">Menu Inicial</a>
+                        <a class="nav-link active" aria-current="page" href="#">Menu Inicial</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Estoque</a>
@@ -42,7 +36,7 @@
                             Administração
                         </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="User/User_Creation.php">Usuários</a></li>
+                        <li><a class="dropdown-item" href="User_Creation.php">Usuários</a></li>
                         <li><a class="dropdown-item" href="#">Estoque</a></li>
                         <li><a class="dropdown-item" href="#">Exemplo</a></li>
                     </ul>
@@ -52,26 +46,10 @@
                     </li>
                 </ul>
                 </div>
+                
             </div>
         </nav>
-        <div class="container">
-            <div class="container-usuarios">
-                <table class="table table-striped">
-                        <thead>
-                            <th>ID</th>
-                            <th>Nome</th>
-                            <th>Login</th>
-                            <th>Permissão</th>
-                            <th>Situação</th>
-                            <th>Ações</th>   
-                        </thead>
-
-                        <tbody>
-                            <?php include_once "User_list.php"?>
-                        </tbody>
-                </table>
-            </div>
-        </div>
+        <span id="msgAlertaPermissao"></span>
         
     </body>
 </html>

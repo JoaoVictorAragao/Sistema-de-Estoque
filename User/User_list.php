@@ -15,7 +15,9 @@
                             <td>".$login."</td>
                             <td>".$permissao."</td>
                             <td>".$situacao."</td>
-                            <td>Editar/Apagar</td>
+                            <td>
+                                <a href='Att_User.php' type='button' class='btn btn-success'>Editar</a>
+                            </td>
                         </tr>";
                     
       
