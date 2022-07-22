@@ -1,4 +1,4 @@
-# Sistema-de-Estoque
+# Sistema-de-Estoque (Ainda não finalizado)
 Sistema de controle de estoque
 
 Sistema de estoque com controle de acesso, permissões e atividade 
