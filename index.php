@@ -14,7 +14,7 @@
  	
     	<div class="login-container">
     		<h1>Login</h1>
-    		<form method="POST" id="login_user_form" action="User_Validation/User_Validation.php">
+    		<form method="POST" id="login_user_form" action="Privado/User_Controller.php?acao=login">
     			<label for="login">E-mail</label>
     			<input type="email" name="login" id="login" placeholder="E-mail" autocomplete="off" value="admin@gmail.com">
     			<label for="senha">Senha</label>

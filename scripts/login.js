@@ -10,11 +10,11 @@ logForm.addEventListener("submit", async (e) =>{
     if(document.getElementById("login").value === ""){
         console.log("Erro: Necessário Preencher Campo Login!")
         msgAlerta.innerHTML = "</br><div class='alert alert-danger' role='alert'>Necessário Preencher o campo login!</div></br>"
-        //e.preventDefault();
+        e.preventDefault();
     }else if(document.getElementById("senha").value === ""){
         console.log("Erro: Necessário Preencher Campo Senha!")
         msgAlerta.innerHTML = "</br><div class='alert alert-danger' role='alert'>Necessário Preencher o campo senha!</div></br>"
-        //e.preventDefault();
+        e.preventDefault();
     }else{
         const dadosForm = new FormData(logForm)
 

@@ -1,5 +1,5 @@
 <?php
-    include_once 'User_Validation/Session_Validation.php';
+    //include_once 'User_Validation/Session_Validation.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,41 +21,34 @@
                 <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Menu Inicial</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Estoque</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Transações</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Administração
-                        </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <li><a class="dropdown-item" href="User/User_Creation.php">Usuários</a></li>
-                        <li><a class="dropdown-item" href="#">Estoque</a></li>
-                        <li><a class="dropdown-item" href="#">Exemplo</a></li>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Menu Inicial</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Estoque</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Transações</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Administração
+                            </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="Public/user_adm.php">Usuários</a></li>
+                            <li><a class="dropdown-item" href="#">Estoque</a></li>
+                            <li><a class="dropdown-item" href="#">Exemplo</a></li>
+                        </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Privado/User_Controller.php?acao=sair">Sair</a>
+                        </li>
                     </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="User_Validation/Session_Exit.php">Sair</a>
-                    </li>
-                </ul>
                 </div>
             </div>
         </nav>
         <span id="msgAlertaPermissao"></span>
-        <h1>Bem Vindo 
-            <?php
-                echo $_SESSION['nome']; 
-                
-            ?>
-        
-        !</h1>
         
     </body>
 </html>
