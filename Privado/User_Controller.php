@@ -42,6 +42,11 @@
         $userService = new UserService($conn, $user);
         $users = $userService->Listar_Usuarios();
         
+    } else if($acao == 'atualizar'){
+
+        $user = new User();
+        
+
     }
 
 
