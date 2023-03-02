@@ -1,7 +1,7 @@
 <?php
     
     require 'User_Service/User_Service.php';
-    require 'conexao.php';
+    require_once 'conexao.php';
     require 'User/user.php';
 
     $acao = isset($_GET['acao']) ? $_GET['acao'] : $acao;
@@ -15,18 +15,21 @@
 
         $userService = new UserService($conn, $user);
         //print_r($userService->Valida_Login());
-        echo $userService->Valida_Login();
+        //echo $userService->Valida_Login();
         
         if($userService->Valida_Login()){
-            session_start();
+            //echo '123';
             header('Location: ../home.php');
         }else{
             //Retornar para a index com ?error=login para exibir mensagem de erro utilizando PHP (tentar utilizando js)
-            header('Location: ../index.php');
+            //header('Location: ../index.php');
+            echo '123456';
         }
 
     } else if($acao == 'sair'){
+        session_start();
         session_destroy();
+        session_unset();
         header('Location: ../index.php');
 
     } else if($acao == 'criar'){

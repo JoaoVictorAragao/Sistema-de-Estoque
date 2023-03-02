@@ -18,12 +18,12 @@ logForm.addEventListener("submit", async (e) =>{
     }else{
         const dadosForm = new FormData(logForm)
 
-        const dados = await fetch("User_Validation/User_Validation.php",{
+        /*const dados = await fetch("../Privado/User_Controller.php?acao=login",{
             method: "POST",
             body: dadosForm
-        })
+        })*/
        
-        const resposta = await dados.json()
+        /*const resposta = await dados.json()
         console.log(resposta)
 
         if(resposta['erro']){
@@ -34,7 +34,7 @@ logForm.addEventListener("submit", async (e) =>{
 
         }
 
-        //window.location.assign("home.php")
+        //window.location.assign("home.php")*/
 
     }
 

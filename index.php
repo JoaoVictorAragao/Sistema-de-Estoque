@@ -1,6 +1,6 @@
 <?php
-	//include_once "conection/conex.php";
 	session_start();
+	require_once('Privado/conexao.php');	
 ?>
 <!DOCTYPE html>
 <html>

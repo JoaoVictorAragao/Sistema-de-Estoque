@@ -1,5 +1,12 @@
 <?php
-    //include_once 'User_Validation/Session_Validation.php';
+    session_start();
+	require_once('Privado/conexao.php');	
+    
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: index.php');
+        exit;
+      }
+
 ?>
 
 <!DOCTYPE html>
