@@ -17,7 +17,8 @@
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             $senha_hash = password_hash($user['senha'], PASSWORD_DEFAULT);
         
-            if ($senha_hash && password_verify($this->user->getSenha(), $senha_hash)) {
+            if ($senha_hash && password_verify($this->user->getSenha(), $senha_hash) 
+            && $this->user->getSituacao() == 'Ativo') {
                 // login e senha corretos
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
@@ -44,6 +45,21 @@
         public function Info_Login(){
             //Após consulta com o BD retorna as informações do login
             //$_SESSION['id'];
+        }
+
+        public function Atualizar_Usuario(){
+
+            $query = 'UPDATE user_cad
+            SET username = :username, login = :login, situacao = :situacao
+            WHERE id = :id';
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':id', $this->user->getId());
+            $stmt->bindValue(':username', $this->user->getNome());
+            $stmt->bindValue(':login', $this->user->getLogin());
+            $stmt->bindValue(':situacao', $this->user->getSituacao());
+            //$stmt->bindValue(':permissao', $this->user->getPermissao());
+            $stmt->execute();
+        
         }
 
     }

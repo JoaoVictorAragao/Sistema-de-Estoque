@@ -22,8 +22,8 @@
             header('Location: ../home.php');
         }else{
             //Retornar para a index com ?error=login para exibir mensagem de erro utilizando PHP (tentar utilizando js)
-            //header('Location: ../index.php');
-            echo '123456';
+            header('Location: ../index.php');
+            
         }
 
     } else if($acao == 'sair'){
@@ -45,9 +45,32 @@
         $userService = new UserService($conn, $user);
         $users = $userService->Listar_Usuarios();
         
-    } else if($acao == 'atualizar'){
+        //echo json_encode($users);
 
-        $user = new User();
+       // foreach($users as $indice => $user){
+           
+       // }
+
+    } else if($acao == 'atualizar'){
+        
+        $id = $_POST['id'];
+        $login = $_POST['login'];
+        $nome = $_POST['username'];
+        $situacao = $_POST['situacao'];
+
+        $user = new user();
+        $user->setId($id);
+        $user->setLogin($login);
+        $user->setNome($nome);
+        $user->setSituacao($situacao);
+
+        $conn = new Conexao();
+
+        $userService = new UserService($conn, $user);
+        $userService->Atualizar_Usuario();
+       
+        header('Location: ../Public/user_adm.php');
+        
         
 
     }

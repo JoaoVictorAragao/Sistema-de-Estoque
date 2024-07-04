@@ -6,6 +6,7 @@
         private $senha;
         private $nome;
         private $permissao;
+        private $situacao;
         
         function setLogin($login){
             $this->login = $login;
@@ -45,6 +46,14 @@
 
         function getPermissao(){
             return $this->permissao;
+        }
+
+        function setSituacao($situacao){
+            $this->situacao = $situacao;
+        }
+
+        function getSituacao(){
+            return $this->situacao;
         }
 
     }

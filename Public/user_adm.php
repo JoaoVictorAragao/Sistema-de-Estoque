@@ -22,6 +22,8 @@
                 form.className = 'row'
 
             }
+
+            
         </script>
    
     </head>
@@ -55,7 +57,7 @@
                     </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Privado/User_Controller.php?acao=sair">Sair</a>
+                        <a class="nav-link" href="../Privado/User_Controller.php?acao=sair">Sair</a>
                     </li>
                 </ul>
                 </div>
@@ -72,43 +74,65 @@
                                     <td>LOGIN</td>
                                     <td>PERMISSÃO</td>
                                     <td>SITUAÇÃO</td>
+                                    <td>AÇÕES</td>
                     </thead>
-                    <? foreach($users as $indice => $user){?>
-                                <tbody>
-                                    <tr>
-                                        <td><?= $user->id ?></td>
-                                        <td><?= $user->nome ?></td>
-                                        <td><?= $user->login ?></td>
-                                        <td><?= $user->permissao ?></td>
-                                        <td><?= $user->situacao ?></td>
-                                        <!--Inserir a abertura de um modal para edição do usuário-->
-                                        <td><i type="button" class = "btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</i>
-
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
+                    <?php foreach($users as $user): ?>
+                        <?php if(!empty($user)): ?>
+                            <tbody>
+                                <tr>
+                                    <td><?= $user->id ?? '' ?></td>
+                                    <td><?= $user->username ?? '' ?></td>
+                                    <td><?= $user->login ?? '' ?></td>
+                                    <td><?= $user->permissao ?? '' ?></td>
+                                    <td><?= $user->situacao ?? '' ?></td>
+                                    <td><i type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal-<?= $user->username ?>">Editar</i>
+                                        <div class="modal fade" id="Modal-<?= $user->username ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Editar usuário <?= $user->nome ?></h5>
+                                                        <h5 class="modal-title" id="exampleModalLabel">Editar usuário <?= $user->username ?></h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        ...
+                                                    <form id="att_user" action="../Privado/User_Controller.php?acao=atualizar" method="post">
+                                                            <input hidden type="id" name="id" value="<?= $user->id ?? '' ?>">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Nome:</label>
+                                                                <input type="text" class="form-control" id="recipient-name" name="username" value="<?= $user->username ?? '' ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Login:</label>
+                                                                <input type="text" class="form-control" id="recipient-name" name="login" value="<?= $user->login ?? '' ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Permissão:</label>
+                                                                <input type="text" class="form-control" id="recipient-name" name="permissao" value="<?= $user->permissao ?? '' ?>">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Situação:</label>
+                                                                <input hidden type="text" class="form-control" id="situacao" name="situacao" value="<?= $user->situacao ?? '' ?>" list="situacao-list">
+                                                                <select class="form-select" id="situacao" name="situacao">
+                                                                    <option value="Ativo" <?= isset($user->situacao) && $user->situacao == 'Ativo' ? 'selected' : '' ?>>Ativo</option>
+                                                                    <option value="Inativo" <?= isset($user->situacao) && $user->situacao == 'Inativo' ? 'selected' : '' ?>>Inativo</option>
+                                                                </select>
+                                                            </div>
+                                                        </form>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                                        <button form="att_user" type="submit" class="btn btn-primary">Salvar</button>
                                                     </div>
                                                 </div>
-                                                </div>
+                                            </div>
+                                        </div>
 
-                                            <i type="button" class = "btn btn-danger" onclick = "desativar()">Desativar</i>
-                                            <i type="button" class = "btn btn-warning">Permissão</i>
-                                        </td>
-                                    </tr>
-                                    
-                                </tbody>
-                    <? } ?>
+                                        <i type="button" class = "btn btn-danger" onclick = "desativar()">Desativar</i>
+                                        <i type="button" class = "btn btn-warning">Permissão</i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        <?php endif; ?>
+                    <?php endforeach; ?>                                                                      
                 </table>    
             </div>
                 
