@@ -20,12 +20,10 @@
     			<label for="senha">Senha</label>
     			<input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="off" value="123@Senha">
     			<a href="#" id="forgot-pass">Esqueceu a senha?</a>
-    			<input type="submit" value="Login" id="login_user">
+    			<input form="login_user_form" type="submit" value="Login" id="login_user">
 				<span id="msgAlerta"></span>
 				<script src="scripts/login.js"></script>
     		</form>
-			
-    	</div>
-        
+    	</div>    
     </body>
 </html>

@@ -18,3 +18,9 @@
     box-shadow:  14px 14px 28px #a1a1a1,
              -14px -14px 28px #ffffff;
 }
+
+.cadastrar-btn{
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}

@@ -67,15 +67,21 @@
         
         <div>
             <div>
+                
+                
                 <table class="table table-striped container-md">
+                    <div>AQUI</div>
                     <thead>
                                     <td>ID</td>
                                     <td>NOME</td>
                                     <td>LOGIN</td>
                                     <td>PERMISSÃO</td>
                                     <td>SITUAÇÃO</td>
+                                    <td>MATRÍCULA</td>
                                     <td>AÇÕES</td>
+                                    
                     </thead>
+                    
                     <?php foreach($users as $user): ?>
                         <?php if(!empty($user)): ?>
                             <tbody>
@@ -85,6 +91,7 @@
                                     <td><?= $user->login ?? '' ?></td>
                                     <td><?= $user->permissao ?? '' ?></td>
                                     <td><?= $user->situacao ?? '' ?></td>
+                                    <td>NºMat</td>
                                     <td><i type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal-<?= $user->username ?>">Editar</i>
                                         <div class="modal fade" id="Modal-<?= $user->username ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">

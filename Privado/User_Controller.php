@@ -10,7 +10,7 @@
         $user = new user();
         $user->setLogin($_POST['login']);
         $user->setSenha($_POST['senha']);
-
+        
         $conn = new Conexao();
 
         $userService = new UserService($conn, $user);
@@ -18,9 +18,10 @@
         //echo $userService->Valida_Login();
         
         if($userService->Valida_Login()){
-            //echo '123';
+           
             header('Location: ../home.php');
         }else{
+            //echo '123';
             //Retornar para a index com ?error=login para exibir mensagem de erro utilizando PHP (tentar utilizando js)
             header('Location: ../index.php');
             

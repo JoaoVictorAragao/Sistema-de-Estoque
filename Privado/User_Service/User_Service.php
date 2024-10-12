@@ -9,21 +9,22 @@
             $this->user = $user;
         }
         
-        public function Valida_Login(){
-            $query = 'SELECT id, senha FROM user_cad WHERE login = :login';
+        public function Valida_Login(){         
+            $query = 'SELECT * FROM user_cad WHERE login = :login';
             $stmt = $this->conexao->prepare($query);
             $stmt->bindValue(':login', $this->user->getLogin());
             $stmt->execute();
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
             $senha_hash = password_hash($user['senha'], PASSWORD_DEFAULT);
-        
+            
             if ($senha_hash && password_verify($this->user->getSenha(), $senha_hash) 
-            && $this->user->getSituacao() == 'Ativo') {
+            && $user['situacao'] == 'ativo') {
                 // login e senha corretos
                 session_start();
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $this->user->getLogin();
                 $this->user->setId($user['id']);
+                
                 return true;
             } else {
                 // login ou senha incorretos

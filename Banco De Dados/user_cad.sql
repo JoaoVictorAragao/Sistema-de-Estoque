@@ -9,3 +9,6 @@ create table user_cad(
 );
 
 select senha from user_cad where login ='admin@gmail.com';
+
+ALTER TABLE user_cad
+    ADD situacao ENUM('ativo', 'inativo') NOT NULL DEFAULT 'ativo';
