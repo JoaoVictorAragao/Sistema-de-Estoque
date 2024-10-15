@@ -70,9 +70,7 @@
                 
                 
                 <table class="table table-striped container-md">
-                    <div>
-                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal-Adicionar">Adicionar Usuário</button>
-                    </div>
+                    
                     <thead>
                                     <td>ID</td>
                                     <td>NOME</td>
@@ -103,7 +101,7 @@
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
-                                                    <form id="att_user-<?= $user->id ?>" action="..\Privado\User_Controller.php?acao=atualizar" method="post">
+                                                    <form id="att_user" action="..\Privado\User_Controller.php?acao=atualizar" method="post">
                                                             <input hidden type="id" name="id" value="<?= $user->id ?? '' ?>">
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Nome:</label>
@@ -121,29 +119,22 @@
                                                                 <label for="recipient-name" class="col-form-label">Situação:</label>
                                                                 <input hidden type="text" class="form-control" id="situacao" name="situacao" value="<?= $user->situacao ?? '' ?>" list="situacao-list">
                                                                 <select class="form-select" id="situacao" name="situacao">
-                                                                    <option value="Ativo" <?= isset($user->situacao) && $user->situacao == 'ativo' ? 'selected' : '' ?>>Ativo</option>
-                                                                    <option value="Inativo" <?= isset($user->situacao) && $user->situacao == 'inativo' ? 'selected' : '' ?>>Inativo</option>
+                                                                    <option value="Ativo" <?= isset($user->situacao) && $user->situacao == 'Ativo' ? 'selected' : '' ?>>Ativo</option>
+                                                                    <option value="Inativo" <?= isset($user->situacao) && $user->situacao == 'Inativo' ? 'selected' : '' ?>>Inativo</option>
                                                                 </select>
                                                             </div>
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                                                        <button form="att_user-<?= $user->id ?>" type="submit" class="btn btn-primary">Salvar</button>
+                                                        <button form="att_user" type="submit" class="btn btn-primary">Salvar</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <form hidden id="desativar_user-<?= $user->id ?>" action="..\Privado\User_Controller.php?acao=desativar" method="post">
-                                            <input hidden type="id" name="id" value="<?= $user->id ?? '' ?>">
-                                            <input hidden name="username" value="<?= $user->username ?? '' ?>">
-                                            <input hidden name="login" value="<?= $user->login ?? '' ?>">
-                                            <input hidden name="permissao" value="<?= $user->permissao ?? '' ?>">
-                                            <!--  Adicionar operador ternário para que o botão altere entre ATIVO/INATIVO e SUCESS/DANGER -->
-                                            <input hidden name="situacao" value="<?= $user->situacao ?? '' ?>">
-                                        </form>
-                                        <button form="desativar_user-<?= $user->id ?>" type="submit" class="btn btn-<?= $user->situacao == 'ativo' ? 'danger' : 'success' ?>"><?= $user->situacao == 'ativo' ? 'Desativar' : 'Ativar' ?></button>
-                                        <button type="button" class="btn btn-warning">Permissão</button>
+
+                                        <i type="button" class = "btn btn-danger" onclick = "desativar()">Desativar</i>
+                                        <i type="button" class = "btn btn-warning">Permissão</i>
                                     </td>
                                 </tr>
                             </tbody>

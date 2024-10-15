@@ -53,7 +53,6 @@
        // }
 
     } else if($acao == 'atualizar'){
-        
         $id = $_POST['id'];
         $login = $_POST['login'];
         $nome = $_POST['username'];
@@ -66,7 +65,7 @@
         $user->setSituacao($situacao);
 
         $conn = new Conexao();
-
+        //var_dump($user);    
         $userService = new UserService($conn, $user);
         $userService->Atualizar_Usuario();
        
@@ -74,6 +73,22 @@
         
         
 
+    } else if($acao == 'desativar'){
+        $id = $_POST['id'];
+        $login = $_POST['login'];
+        $nome = $_POST['username'];
+        $situacao = $_POST['situacao'];
+        $user = new user();
+        $user->setId($id);
+        $user->setLogin($login);
+        $user->setNome($nome);
+        $user->setSituacao( ($situacao == "ativo") ? "inativo" : "ativo");
+        $conn = new Conexao();
+        var_dump($user);    
+        $userService = new UserService($conn, $user);
+        $userService->Atualizar_Usuario();
+       
+        header('Location: ../Public/user_adm.php');
     }
 
 

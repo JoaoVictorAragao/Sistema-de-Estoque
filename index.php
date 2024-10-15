@@ -18,7 +18,7 @@
     			<label for="login">E-mail</label>
     			<input type="email" name="login" id="login" placeholder="E-mail" autocomplete="off" value="admin@gmail.com">
     			<label for="senha">Senha</label>
-    			<input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="off" value="123@Senha">
+    			<input type="password" name="senha" id="senha" placeholder="Senha" autocomplete="off" value="123@senha">
     			<a href="#" id="forgot-pass">Esqueceu a senha?</a>
     			<input form="login_user_form" type="submit" value="Login" id="login_user">
 				<span id="msgAlerta"></span>
