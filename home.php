@@ -1,12 +1,6 @@
 <?php
-    session_start();
 	require_once('Privado/conexao.php');	
-    
-    if (!isset($_SESSION['user_id'])) {
-        header('Location: index.php');
-        exit;
-      }
-
+    require '../Privado/Configs/config.php';
 ?>
 
 <!DOCTYPE html>

@@ -63,6 +63,21 @@
         
         }
 
+        public function Criar_Usuario(){
+            $query = 'INSERT INTO user_cad
+            (username, login, senha, situacao)
+            VALUES
+            (:username, :login, :senha, :situacao)';
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':username', $this->user->getNome());
+            $stmt->bindValue(':login', $this->user->getLogin());
+            $stmt->bindValue(':senha', $this->user->getSenha());
+            $stmt->bindValue(':situacao', $this->user->getSituacao());
+            //$stmt->bindValue(':permissao', $this->user->getPermissao());
+            $stmt->execute();
+            
+        }
+
     }
 
 ?>

@@ -1,6 +1,6 @@
 <?php
    $acao = 'listar';
-   require '../Privado/User_Controller.php';
+   require '../Privado/Controller/User_Controller.php';
 ?>
 
 <!DOCTYPE html>

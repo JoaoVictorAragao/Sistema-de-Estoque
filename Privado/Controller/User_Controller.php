@@ -1,8 +1,8 @@
 <?php
     
-    require 'User_Service/User_Service.php';
+    require 'Services/User_Service.php';
     require_once 'conexao.php';
-    require 'User/user.php';
+    require 'Entities/user.php';
 
     $acao = isset($_GET['acao']) ? $_GET['acao'] : $acao;
 
@@ -33,24 +33,12 @@
         session_unset();
         header('Location: ../index.php');
 
-    } else if($acao == 'criar'){
-        $user = new user();
-        $user->setLogin($_POST['login']);
-        $user->setSenha($_POST['senha']);
-        //set nome, permissão etc
-
     } else if($acao == 'listar'){
         $user = new user();
         $conn = new Conexao();
 
         $userService = new UserService($conn, $user);
         $users = $userService->Listar_Usuarios();
-        
-        //echo json_encode($users);
-
-       // foreach($users as $indice => $user){
-           
-       // }
 
     } else if($acao == 'atualizar'){
         $id = $_POST['id'];
@@ -78,16 +66,37 @@
         $login = $_POST['login'];
         $nome = $_POST['username'];
         $situacao = $_POST['situacao'];
+
         $user = new user();
         $user->setId($id);
         $user->setLogin($login);
         $user->setNome($nome);
         $user->setSituacao( ($situacao == "ativo") ? "inativo" : "ativo");
+
         $conn = new Conexao();
-        var_dump($user);    
+
+        //var_dump($user);    
         $userService = new UserService($conn, $user);
         $userService->Atualizar_Usuario();
        
+        header('Location: ../Public/user_adm.php');
+
+    } else if($acao == 'criar'){
+        $login = $_POST['login'];
+        $senha = $_POST['senha'];
+        $nome = $_POST['username'];
+        var_dump($_POST);
+        $user = new user();
+        $user->setLogin($login);
+        $user->setSenha($senha);
+        $user->setNome($nome);
+        $user->setSituacao('ativo');
+
+        $conn = new Conexao();
+
+        $userService = new UserService($conn, $user);
+        $userService->Criar_Usuario();
+
         header('Location: ../Public/user_adm.php');
     }
 
