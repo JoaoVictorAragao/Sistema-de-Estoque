@@ -1,6 +1,6 @@
 <?php
-	require_once('Privado/conexao.php');	
-    require '../Privado/Configs/config.php';
+	require_once 'Privado/Configs/conexao.php';	
+    require 'Privado/Configs/config.php';
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +43,7 @@
                         </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Privado/User_Controller.php?acao=sair">Sair</a>
+                            <a class="nav-link" href="Privado/Controller/User_Controller.php?acao=sair">Sair</a>
                         </li>
                     </ul>
                 </div>

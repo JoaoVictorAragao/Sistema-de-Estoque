@@ -78,6 +78,17 @@
             
         }
 
+        public function Verifica_Usuario(){
+
+            $query = 'SELECT *
+            FROM user_cad
+            WHERE login = :login';
+            $stmt = $this->conexao->prepare($query);
+            $stmt->bindValue(':login', $this->user->getLogin());
+            $stmt->execute();
+            return $stmt->rowCount();
+        }
+
     }
 
 ?>

@@ -1,8 +1,8 @@
 <?php
 
 $acao = 'listar';
-require '../Privado/Controller/User_Controller.php';
-require '../Privado/Configs/config.php';
+require __DIR__ . '/../Privado/Controller/User_Controller.php';
+require __DIR__ . '/../Privado/Configs/config.php';
 
 ?>
 
@@ -18,14 +18,7 @@ require '../Privado/Configs/config.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
     <script>
-        function editar(id, txt_area) {
 
-            let form = document.createElement('form')
-            form.action = 'User_Controller.php?acao=atualizar'
-            form.method = 'post'
-            form.className = 'row'
-
-        }
     </script>
 
 </head>
@@ -60,7 +53,7 @@ require '../Privado/Configs/config.php';
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../Privado/User_Controller.php?acao=sair">Sair</a>
+                        <a class="nav-link" href="../Privado/Controller/User_Controller.php?acao=sair">Sair</a>
                     </li>
                 </ul>
             </div>
@@ -68,14 +61,13 @@ require '../Privado/Configs/config.php';
     </nav>
     <span id="msgAlertaPermissao"></span>
 
+
+
     <div>
+        <button type="button" class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#Modal-criar">Adicionar Usuário</button>
         <div>
-
-
             <table class="table table-striped container-md">
-                <div>
-                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#Modal-criar">Adicionar Usuário</button>
-                </div>
+
                 <thead>
                     <td>ID</td>
                     <td>NOME</td>
@@ -137,12 +129,11 @@ require '../Privado/Configs/config.php';
                                             </div>
                                         </div>
                                     </div>
-                                    <form hidden id="desativar_user-<?= $user->id ?>" action="..\Privado\User_Controller.php?acao=desativar" method="post">
+                                    <form hidden id="desativar_user-<?= $user->id ?>" action="..\Privado\Controller\User_Controller.php?acao=desativar" method="post">
                                         <input hidden type="id" name="id" value="<?= $user->id ?? '' ?>">
                                         <input hidden name="username" value="<?= $user->username ?? '' ?>">
                                         <input hidden name="login" value="<?= $user->login ?? '' ?>">
                                         <input hidden name="permissao" value="<?= $user->permissao ?? '' ?>">
-                                        <!--  Adicionar operador ternário para que o botão altere entre ATIVO/INATIVO e SUCESS/DANGER -->
                                         <input hidden name="situacao" value="<?= $user->situacao ?? '' ?>">
                                     </form>
                                     <button form="desativar_user-<?= $user->id ?>" type="submit" class="btn btn-<?= $user->situacao == 'ativo' ? 'danger' : 'success' ?>"><?= $user->situacao == 'ativo' ? 'Desativar' : 'Ativar' ?></button>
@@ -164,33 +155,67 @@ require '../Privado/Configs/config.php';
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="cria_user" action="..\Privado\User_Controller.php?acao=criar" method="post">
+                    <form id="cria_user" action="..\Privado\Controller\User_Controller.php?acao=criar" method="post">
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Nome:</label>
-                            <input type="text" class="form-control" id="recipient-name" name="username" value="">
+                            <input type="text" class="form-control" id="username" name="username" value="" required>
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Login:</label>
-                            <input type="text" class="form-control" id="recipient-name" name="login" value="">
+                            <input type="text" class="form-control" id="login" name="login" value="" required>
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Permissão:</label>
-                            <input type="text" class="form-control" id="recipient-name" name="permissao" value="Fazer um seletor de permissões">
+                            <input type="text" class="form-control" id="permissao" name="permissao" value="Fazer um seletor de permissões">
                         </div>
                         <div class="mb-3">
-                            <input hidden type="text" class="form-control" id="situacao" name="situacao" value="ativo" list="situacao-list">                            
+                            <input hidden type="text" class="form-control" id="situacao" name="situacao" value="ativo" list="situacao-list">
                         </div>
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Senha:</label>
-                            <input type="text" class="form-control" id="recipient-name" name="senha" value="">
+                            <input type="password" class="form-control" id="recipient-name" name="senha" value="" required>
                         </div>
                     </form>
                 </div>
+                <div id="login-feedback"></div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                     <button form="cria_user" type="submit" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
+
+            <script>
+                document.getElementById('login').addEventListener('blur', function() {
+                    const login = this.value; // Pega o valor do input de login
+
+                    if (login !== '') {
+                        // Faz a requisição AJAX para verificar se o login já existe
+                        fetch('../Privado/Controller/User_Controller.php?acao=verificar&login=' + login, {
+                                method: 'GET',
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                const feedback = document.getElementById('login-feedback');
+                                if (data.status === 'existe usuário cadastrado') {
+                                    feedback.innerHTML = '<div class="alert alert-danger">Este login já existe.</div>';
+                                } else if (data.status === 'não existe usuário cadastrado') {
+                                    feedback.textContent = '';
+                                }
+                            })
+                            .catch(error => console.error('Erro:', error));
+                    }
+                    console.log(login);
+                });
+
+                // Impede o envio do formul rio se o login já existir
+                document.getElementById('cria_user').addEventListener('submit', function(event) {
+                    const feedback = document.getElementById('login-feedback');
+                    if (feedback.textContent !== '') {
+                        event.preventDefault(); // Impede o envio do formul rio
+                        alert('Por favor, escolha outro login.');
+                    }
+                });
+            </script>
 
 </body>
 
