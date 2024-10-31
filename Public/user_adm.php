@@ -65,6 +65,7 @@ require __DIR__ . '/../Privado/Configs/config.php';
 
     <div>
         <button type="button" class="btn btn-success ms-auto" data-bs-toggle="modal" data-bs-target="#Modal-criar">Adicionar Usuário</button>
+        <input id="search_user" type="search" placeholder="Pesquisar"></input>
         <div>
             <table class="table table-striped container-md">
 
@@ -215,6 +216,24 @@ require __DIR__ . '/../Privado/Configs/config.php';
                         alert('Por favor, escolha outro login.');
                     }
                 });
+
+                document.getElementById('search_user').addEventListener('keyup', function(event) {
+                    var searchValue = this.value.toLowerCase();
+                    var rows = document.getElementsByTagName('tr');
+                    for (var i = 0; i < rows.length; i++) {
+                        var row = rows[i];
+                        if (row.parentNode.tagName === 'THEAD') {
+                            continue;
+                        }
+                        var usernameCell = row.cells[1];
+                        var username = usernameCell.textContent.toLowerCase();
+                        if (username.indexOf(searchValue) > -1) {
+                            row.style.display = '';
+                        }else{
+                            row.style.display = 'none';
+                        }
+
+                }})
             </script>
 
 </body>
